@@ -14,8 +14,7 @@ PXD.modes.docente = function (ctx) {
     ctx.sheet.innerHTML = '<div class="sheet-empty"><svg class="lock" width="56" height="56" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg><h2>Panel docente</h2><p>Inicia sesión con el PIN para ver los resultados de tus alumnos.</p></div>';
     ctx.panel.innerHTML = '<p class="kicker">Panel docente</p><h2>Acceso para docentes</h2>' +
       '<form id="pinForm" class="form"><label for="pin">PIN</label><input id="pin" type="password" inputmode="numeric" maxlength="12" autocomplete="off" required>' +
-      (st.error ? '<p class="err">' + st.error + '</p>' : '') + '<button class="btn primary" type="submit">Entrar</button></form>' +
-      '<p class="muted small">PIN inicial: 1234. Se cambia en el archivo js/config.js.</p>';
+      (st.error ? '<p class="err">' + st.error + '</p>' : '') + '<button class="btn primary" type="submit">Entrar</button></form>';
     const f = ctx.panel.querySelector('#pinForm');
     f.addEventListener('submit', e => { e.preventDefault(); if (f.querySelector('#pin').value === PIN) { st.ok = true; st.error = ''; load(); } else { st.error = 'PIN incorrecto. Revisa e inténtalo otra vez.'; login(); } });
     setTimeout(() => { const i = ctx.panel.querySelector('#pin'); if (i) i.focus(); }, 50);

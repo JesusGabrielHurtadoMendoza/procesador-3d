@@ -16,18 +16,18 @@ PXD.modes.inicio = function (ctx) {
   function first() { const a = ACTS.find(x => ctx.modeEnabled(x[0]) && x[0] !== 'docente'); return a ? a[0] : null; }
   function render() {
     ctx.setDock('');
-    const mods = PXD.data.MODULOS || [];
+    const mods = (PXD.data.MODULOS || []).filter(m => m.disponible);
     const acts = ACTS.filter(a => ctx.modeEnabled(a[0]));
     ctx.sheet.hidden = false;
     ctx.sheet.innerHTML = '<div class="home">' +
       '<div class="hero"><div class="chip-art" aria-hidden="true"><i></i></div><div><h1>Procesador 3D</h1><p>Aprende Arquitectura de Computadoras con un procesador en 3D que puedes desarmar, armar y ver funcionar.</p></div></div>' +
-      '<h3>Elige un módulo</h3><div class="mods">' + mods.map(m => '<article class="mod' + (m.disponible ? '' : ' off') + '"><h4>' + m.nombre + '</h4><p>' + m.descripcion + '</p>' +
+      '<h3>Módulo</h3><div class="mods">' + mods.map(m => '<article class="mod' + (m.disponible ? '' : ' off') + '"><h4>' + m.nombre + '</h4><p>' + m.descripcion + '</p>' +
         (m.disponible ? '<button class="btn primary" data-enter="1">Entrar</button>' : '<span class="soon">Próximamente</span>') + '</article>').join('') + '</div>' +
       (acts.length ? '<h3>Actividades del módulo Arquitectura de Computadoras</h3><div class="acts">' + acts.map(a => '<button class="act" data-go="' + a[0] + '"><b>' + a[1] + '</b><span>' + a[2] + '</span></button>').join('') + '</div>' : '') +
       '<div class="manual"><img src="assets/qr-manual.png" alt="Código QR para descargar el manual de usuario" width="132" height="132">' +
         '<div><h4>Manual de usuario</h4><p>Escanea el código con tu celular o descárgalo aquí. Explica paso a paso cómo usar cada parte de la página.</p>' +
         '<a class="btn primary" href="docs/Manual_de_Usuario_Procesador3D.pdf" download>Descargar manual (PDF)</a></div></div>' +
-      '<div class="credits"><span>Hecho por <b>Jesús Gabriel Hurtado Mendoza</b> y <b>Alan Zabdiel Gómez Martín</b></span><span>Ingeniería en Sistemas Computacionales · TESJI</span><span>Versión ' + ((ctx.CFG && ctx.CFG.version) || '1.1') + '</span></div>' +
+      '<div class="credits"><span>Hecho por <b>Jesús Gabriel Hurtado Mendoza</b> y <b>Alan Zabdiel Gómez Martín</b></span><span>Ingeniería en Sistemas Computacionales · TESJI</span></div>' +
       '</div>';
     // si la página está publicada, el QR se genera con su dirección real (así sirve aunque cambie el nombre del repositorio)
     try {
@@ -40,7 +40,7 @@ PXD.modes.inicio = function (ctx) {
     ctx.sheet.querySelectorAll('[data-go]').forEach(b => b.onclick = () => ctx.setMode(b.dataset.go));
     ctx.panel.innerHTML = '<p class="kicker">Inicio</p><h2>Bienvenido</h2><p class="lede">Así se usa:</p>' +
       '<ol class="howto"><li>Elige el módulo <b>Arquitectura de Computadoras</b>.</li><li>Gira y acerca el procesador con el mouse o el dedo.</li><li>Toca una pieza para leer qué es y para qué sirve.</li><li>Ármalo tú mismo y mira el ciclo de instrucción.</li><li>Termina con la evaluación y revisa tu resultado.</li></ol>' +
-      '<p class="muted small">Funciona en computadora y en celular, sin instalar nada. Versión ' + ((ctx.CFG && ctx.CFG.version) || '1.0') + '.</p>';
+      '<p class="muted small">Funciona en computadora y en celular, sin instalar nada.</p>';
   }
   return { enter: render, exit() { ctx.sheet.hidden = true; } };
 };
