@@ -1,5 +1,5 @@
 /* Procesador 3D — service worker: guarda la página para que funcione sin internet después de la primera visita. */
-const CACHE = 'procesador-3d-v1.1';
+const CACHE = 'procesador-3d-2';
 const SHELL = ['./', 'index.html', 'css/styles.css', 'manifest.webmanifest',
   'js/config.js', 'js/data.js', 'js/data-evaluacion.js', 'js/db.js', 'js/audio.js', 'js/parts.js', 'js/fx.js',
   'js/mode-fabricacion.js', 'js/mode-comparar.js', 'js/mode-sockets.js', 'js/mode-inicio.js', 'js/mode-evaluacion.js', 'js/mode-docente.js',
